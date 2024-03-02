@@ -19,14 +19,14 @@ client.on("messageCreate", async (message) => {
     const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [
-          {"role": "system", "content": "You are a helpful assistant."},
+          {"role": "system", "content": process.env.SYSTEM_MESSAGE},
           {"role": "user", "content": message.content}
         ]
     })
 
     console.log(completion.choices[0]);
 
-    //message.channel.send(completion.choices[0]);
+    message.channel.send(completion.choices[0].message.content);
 });
 
 client.login(process.env.TOKEN);
