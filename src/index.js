@@ -11,11 +11,9 @@ client.on("ready", (client) => {
 })
 
 client.on("messageCreate", async (message) => {
-    console.log(message.channelId);
     if(message.channelId != process.env.CHANNEL_ID) return
     if(message.author.bot) return
-    console.log(message.content)
-
+    
     const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [
